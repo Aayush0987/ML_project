@@ -8,6 +8,7 @@ import dill
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
+
 def save_object(file_path, obj):
     try:
         dir_path = os.path.dirname(file_path)
@@ -17,7 +18,8 @@ def save_object(file_path, obj):
         logging.info(f"Object saved at {file_path}")
     except Exception as e:
         raise CustomException(f"Error saving object: {e}", sys) from e
-    
+
+
 def evaluate_model(X_train, y_train, X_test, y_test, models, params):
     try:
         report = {}
@@ -43,4 +45,12 @@ def evaluate_model(X_train, y_train, X_test, y_test, models, params):
         return report, fitted_models  # return both
 
     except Exception as e: 
+        raise CustomException(e, sys)
+
+
+def load_object(file_path):                 
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
         raise CustomException(e, sys)

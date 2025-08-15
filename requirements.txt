@@ -7,4 +7,7 @@ catboost
 xgboost
 dill
 xgboost
+flask
+flask-cors
+flask-restful
 #-e .
